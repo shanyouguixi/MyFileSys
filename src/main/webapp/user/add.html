@@ -1,0 +1,91 @@
+<style>
+        * {
+	    margin: 0;
+	    padding: 0;
+	}
+ 
+	table {
+	    margin: auto;
+	    width: 300px;
+	    border-collpase: collapse;
+	}
+	 table tr td{ 
+	 	border-top:#424041 solid 1px; 
+	 	width:50%;  
+	 	text-align:center; 
+	 	line-height:44px;
+	 	}
+	 b{
+	 	margin-left: 20px;
+	 }
+    </style>
+    <script type="text/javascript">
+<!--
+
+//-->
+	function pwmd5(){
+		var password = $("#password").val();
+		var md5str = hex_md5(password);
+		$("#password_md5").val(md5str);
+	}
+</script>
+#@layout()
+#define main()
+<div > 
+<fieldset >
+	<form action="/MyFileSys/user/add" method="get">
+	<table class="table_box" aligin="center" cellspacing="0" border="1" style="border-collapse:collapse;">
+		<tr>
+			<td><b>用户名：</b></td>
+			<td><input name="name" type="text"  placeholder="请在这里输入用户名" style="text-align:center;line-height:44px;"/></td>
+		</tr>
+		<tr>
+			<td><b>密码：</b></td>
+			<td>
+				<input id="password" type="password" onblur="pwmd5()" placeholder="请在这里输入密码" style="text-align:center;line-height:44px;"/>
+				<input id="password_md5" type="hidden" name="password"/>
+			</td>
+		</tr>
+		<tr>
+			<td><b>是否允许登录:</b></td>
+			<td>
+				<select name="login" style="margin-top: 12px;">
+					<option value="1" >允许登录</option>
+					<option value="0" >禁止登录</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><b>用户角色:</b></td>
+			<td>
+				<select name="userType" style="margin-top: 12px;">
+					<option value="2" >普通用户</option>
+					<option value="1" >管理员</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><b>允许查看的菜单</b></td>
+			<td>
+				#for(x:memus)
+					<p><input type="checkbox"  name="memuId" value="#(x.id)" /> #(x.name)</p>
+				#end
+			</td>
+		</tr>
+		<tr>
+			<td><b>允许查看的分组</b></td>
+			<td>
+				#for(x:groups)
+						<p><input type="checkbox" name="groupId" value="#(x.id)" />#(x.name)</p>
+				#end
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#" onClick="javaScript:history.go(-1)">返回</a></td>
+			<td><input value="提交" type="submit"/><b></b></td>
+		</tr>
+	</table>
+	</form>
+</fieldset>
+</div>
+#end

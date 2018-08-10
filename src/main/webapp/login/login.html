@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dth">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+	<title>登录</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link href="/MyFileSys/css/manage.css" media="screen" rel="stylesheet" type="text/css" />
+	<script src="/MyFileSys/js/jquery-1.4.4.min.js" type="text/javascript" ></script>
+	<script src="/MyFileSys/js/md5.js" type="text/javascript" ></script>
+	<style type="">
+		#tlogin{
+			width:60% ;
+			height:100%;
+			margin:auto;
+			background-color: #f1fafc;
+		}
+		th{
+			    text-align:center;
+			    height:60px;
+			}
+			.main{
+				margin-top:100px;
+				height:300px;
+			}
+			.sub{
+				width: 120px;
+				height:40px;
+				margin:4px;
+			}
+			input{
+				height:30px;
+				margin-top: 10px;
+				}
+	</style>
+	<script type="text/javascript">
+		/* var password = $(input[name=password]).val();
+    	//加密成md5
+    	var passwd = $.md5(password); */
+    	function login(){
+    		var password_input = document.getElementById("password").value;
+    	    var id = $("#idtext").val();
+    	    // set password
+    	    var passwd = hex_md5(password_input);
+			console.log(passwd)
+			$.get("/MyFileSys/login/toLogin","id="+id+"&password="+passwd)
+    	}
+    	
+    	function pwmd5(){
+    		var password = $("#password").val();
+    		var md5str = hex_md5(password);
+    		$("#password_md5").val(md5str);
+    	}
+	</script>
+</head>
+<body>
+	<div class="main">
+	<!-- <form action="/MyFileSys/login/login" method="post"> -->
+		<div style="text-align:center;height:100%;">
+			<fieldset class="solid">
+			<legend>登录</legend>
+			<b style="color: red;">#(msg)</b>
+			<form action="/MyFileSys/login/toLogin" method="post">
+			<table id="tlogin"  >
+				<tr>
+					<th><label>id：</label></th>
+					<th><input type="text" name="id" id="idtext" /></th>
+				</tr>
+				<tr>
+					<th><label>密码：</label></th>
+					<th>
+						<input id="password" type="password" onblur="pwmd5()"/>
+						<input id="password_md5" type="hidden" name="password"/>
+					</th>
+				</tr>
+				<tr>
+					<th colspan="2">
+					<button class="sub"  type="submit">登录</button>
+					</th>
+				</tr>
+				<tr>
+					<th colspan="2">
+					<button class="sub" type="reset">重置</button>
+					</th>
+				</tr>
+			</table>
+			</form>
+		</fieldset>
+		
+		</div>
+	<!-- </form> -->
+</body>
+</html>

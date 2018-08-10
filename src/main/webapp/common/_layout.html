@@ -1,0 +1,99 @@
+#define layout()
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link href="/MyFileSys/css/manage.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/MyFileSys/js/jquery-1.4.4.min.js" type="text/javascript" ></script>
+<script src="/MyFileSys/js/md5.js" type="text/javascript" ></script>
+<script type="text/javascript">
+/* $("#navUl li a").click(function(){
+    var aId=$(this).id;
+	$("#memuId").val(aId);
+}) */
+function getValue(e){
+	var str = $(e).text();
+	console.log(str)
+	if($("#memuIdstr")){
+		$("#memuIdstr").val(str);
+	}
+}
+function tobig(url){
+	$("#bigpic").css("display", "block"); 
+	 var large_image = '<img src= ' + url + '></img>';
+		$("#bigpic").html(large_image);
+}
+function tosmall(){
+	$("#bigpic").css("display", "none"); 
+}
+
+</script>
+<style type="text/css">
+	li{
+		frontSize:30px;
+	}
+	.picture{
+        display: none; 
+        position: fixed; 
+        top: 50%; left:50%; 
+        transform: translate(-50%,-50%); 
+        width: 960px; 
+        height: 700px; 
+        line-height: 700px; 
+        text-align:center; 
+        background: #666; 
+        z-index: 20;
+      }
+      .pic1{
+      	display: none;
+      	text-align:left;
+      }
+      .pic0{
+      	display: block;
+      	text-align:left;
+      }
+      #bigpic img{
+	    width: 100% 
+      }
+      #bigpic{
+      	position: absolute;
+      	text-align:center;
+      	margin:auto;
+      	width: 900px;
+      	height: 900px;
+      }
+</style>
+</head>
+<body>
+	<div class="manage_container">
+				<label>个人文件服务器</label>
+				
+		<div class="manage_head" >
+			<div class="manage_logo" >
+				<img src='#(user.headImg??)' alt="" style="height: 10%;width: 10%;" />
+				<input type="hidden" name="user.id" value="#(user.id??)" />
+				<input type="hidden" name="meue.id" id="memuId" />
+				<span >#(user.name??)</span>
+				<span >#(user.age??)</span>
+				#if(user.id==1)
+				<a href="/MyFileSys/user/getUserList/#(user.id??)">管理用户</a>
+				#end
+			</div>
+			<div id="nav">
+				<h1>文件类型</h1>
+				<ul id="navUl" >
+				#for(x : memu)
+					<li><a href="/MyFileSys/files/getGroup/#(x.id)-#(user.id??) " id="#(x.id)"    style="font-size: 25px;"><b >#(x.name??)</b></a></li>
+				#end
+				</ul>
+			</div>
+		</div>
+		<div class="main">
+			#@main()
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="http://mediaplayer.yahoo.com/js">
+</script>
+#end

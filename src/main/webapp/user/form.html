@@ -1,0 +1,86 @@
+<style>
+        * {
+	    margin: 0;
+	    padding: 0;
+	}
+ 
+	table {
+	    margin: auto;
+	    width: 300px;
+	    border-collpase: collapse;
+	}
+	 table tr td{ 
+	 	border-top:#424041 solid 1px; 
+	 	width:50%;  
+	 	text-align:center; 
+	 	line-height:44px;
+	 	}
+	 b{
+	 	margin-left: 20px;
+	 }
+    </style>
+#@layout()
+#define main()
+<div > 
+<fieldset >
+	<form action="/MyFileSys/user/edit" method="get">
+	<table class="table_box" aligin="center" cellspacing="0" border="1" style="border-collapse:collapse;">
+		<tr>
+			<td><b>id:</b></td>
+			<td><input name="id" type="text" value="#(user.id)" readonly="readonly" style="text-align:center;line-height:44px;" /></td>
+		</tr>
+		<tr>
+			<td><b>用户名：</b></td>
+			<td><input name="name" type="text" value="#(user.name)" style="text-align:center;line-height:44px;"/></td>
+		</tr>
+		<tr>
+			<td><b>是否允许登录:</b></td>
+			<td>
+				<select name="login" style="margin-top: 12px;">
+					<option value="0" #(user.login==0?selected="selected":'')>禁止登录</option>
+					<option value="1" #(user.login==1?selected="selected":'')>允许登录</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><b>用户角色:</b></td>
+			<td>
+				<select name="userType" style="margin-top: 12px;">
+					<option value="1" #(user.userType==1?selected="selected":'')>管理员</option>
+					<option value="2" #(user.userType==2?selected="selected":'')>普通用户</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><b>允许查看的菜单</b></td>
+			<td>
+				#for(x:memus)
+					#if(mRule.contains(x.id+''))
+					<p><input type="checkbox" checked="checked" name="memuId" value="#(x.id)" /> #(x.name)</p>
+					#else
+					<p><input type="checkbox"  name="memuId" value="#(x.id)" /> #(x.name)</p>
+					#end
+				#end
+			</td>
+		</tr>
+		<tr>
+			<td><b>允许查看的分组</b></td>
+			<td>
+				#for(x:groups)
+					#if(gRule.contains(x.id+''))
+						<p><input type="checkbox" checked="checked" name="groupId" value="#(x.id)" />#(x.id) #(x.name)</p>
+					#else
+						<p><input type="checkbox" name="groupId" value="#(x.id)" />#(x.id) #(x.name)</p>
+					#end
+				#end
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#" onClick="javaScript:history.go(-1)">返回</a></td>
+			<td><input value="提交" type="submit"/><b></b></td>
+		</tr>
+	</table>
+	</form>
+</fieldset>
+</div>
+#end

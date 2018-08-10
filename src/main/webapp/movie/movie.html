@@ -1,0 +1,94 @@
+#@layout()
+#define main()
+<h1>个人文件服务器-#(memuId)</h1>
+
+<div class="table_box">
+	<form action="/MyFileSys/group/addGroup" method="poster" >
+		<div class="table_box" >
+			<div id="nav">
+				<b>#(theMemu.name??)</b>
+				<input type="hidden" name="memuId" value="#(memuId)"/>
+				<input type="hidden" name="userId" value="#(user.id??)"/>
+				组名称：<input type="text" name="groupName"/>
+				<input type="submit" value="添加分组"/>
+			</div>
+		</div>
+	</form>
+	<div id="nav">
+		<h1>分组</h1>
+		<ul >
+			#for(x : group)
+				<li><a href="/MyFileSys/files/getMyFiles/#(x.id??)-#(user.id)-#(memuId)" style="font-size: 25px;"><b>#(x.name??)</b></a></li>
+			#end
+		</ul>
+	</div>
+</div>
+<div class="table_box">
+<form action="/MyFileSys/files/uploadFiles" method="post" enctype="multipart/form-data">
+	<div class="table_box" >
+		<div id="nav">
+			<input type="file" name="files" multiple="multiple"/>
+			<input type="hidden" name="memuId" value="#(memuId)"/>
+			<select name="groupId">
+				#for(x : group)
+				<option value="#(x.id??)">#(x.name??)</option>
+				#end
+			</select>
+			<input type="submit" value="上传文件"/>
+		</div>
+	</div>
+</form>
+	#if(files!=null&&(files.getList().size())>0)
+	
+	<table class="list">
+		<tbody>
+			#if(files.getList()[0].type=='music')
+			
+				#for(x:files.getList())
+				<tr>
+					<td style="text-align:left;">
+					  <!-- <audio src="#(com.myFileSys.sys.jConfig::BASEPATN)#(x.url)" controls="controls" width="300"></audio> -->
+					  <audio controls="controls" height="100" width="100">
+						  <source src="#(com.myFileSys.sys.jConfig::BASEPATN)#(x.url)" type="audio/mp3" />
+						  <source src="#(com.myFileSys.sys.jConfig::BASEPATN)#(x.url)" type="audio/ogg" />
+						<embed height="100" width="100" src="#(com.myFileSys.sys.jConfig::BASEPATN)#(x.url)" />
+						</audio>
+					  <b>#(x.name)</b>
+					  <a href="/MyFileSys/files/deleteFile/#(x.id)-#(x.type)-#(memuId)-#(groupId)">删除</a>
+					  </td>
+					  </tr>
+				#end
+			#else if(files.getList()[0].type=='picture')
+				#for(i = 0; i < files.getList().size(); i=i+2)
+					<tr>
+					<td >
+						<img class='imgs' alt="" src="#(com.myFileSys.sys.jConfig::BASEPATN)#(files.getList()[i].url)" style="width: 30%; height: auto;max-width: 100%; display: block;" onclick="tobig('#(com.myFileSys.sys.jConfig::BASEPATN)#(files.getList()[i].url)');"/>
+							  <a href="/MyFileSys/files/deleteFile/#(files.getList()[i].id)-#(files.getList()[i].type)-#(memuId)-#(groupId)">删除</a>
+					</td>
+					#if(i+1<(files.getList().size()))
+					<td >
+						<img class='imgs' alt="" src="#(com.myFileSys.sys.jConfig::BASEPATN)#(files.getList()[i+1].url)" style="width: 30%; height: auto;max-width: 100%; display: block;" onclick="tobig('#(com.myFileSys.sys.jConfig::BASEPATN)#(files.getList()[i+1].url)');"/>
+							  <a href="/MyFileSys/files/deleteFile/#(files.getList()[i+1].id)-#(files.getList()[i+1].type)-#(memuId)-#(groupId)">删除</a>
+					</td>
+					#end
+					</tr>
+				#end
+			#else
+				#for(x:files.getList())
+				<tr>
+					<td style="text-align:left;">
+					  <a href="/MyFileSys/files/form/#(x.id)-#(x.type)">#(x.name)</a>
+					</td>
+					</tr>
+				#end
+			#end
+			
+		</tbody>
+	</table>
+	#@paginate(files.pageNumber, files.totalPage, "/MyFileSys/files/getMyFiles/"+groupId+ "-"+ user.id + "-"+memuId+"-")
+	#end
+</div>
+<div id="bigpic" onclick="tosmall();">
+	
+</div>
+#end

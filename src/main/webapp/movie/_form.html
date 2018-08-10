@@ -1,0 +1,18 @@
+<div style="text-align: center;margin: auto;width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;">
+	<fieldset class="solid" style="text-align: center;">
+		<legend>#(movie.name)</legend>
+		<video width="720" height="480" controls autoplay>
+		  <source src="#(com.myFileSys.sys.jConfig::BASEPATN)#(movie.url)" type="video/ogg">
+		  <source src="#(com.myFileSys.sys.jConfig::BASEPATN)#(movie.url)" type="video/mp4">
+		  <source src="#(com.myFileSys.sys.jConfig::BASEPATN)#(movie.url)" type="video/webm">
+		  <object data="#(com.myFileSys.sys.jConfig::BASEPATN)#(movie.url)" width="320" height="240">
+		    <embed width="720" height="480" src="#(com.myFileSys.sys.jConfig::BASEPATN)#(movie.url)">
+		  </object>
+		</video>
+	</fieldset>
+</div>

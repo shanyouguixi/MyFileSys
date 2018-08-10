@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>error</title>
+<style type="text/css">
+	body{
+		width: 100%;
+		height:300px;
+		}
+	.main{
+		width: 100%;
+		height:100%;
+		/* background：liner-gradient("#a1daed","#ffffff") */
+		 FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=##a1daed,endColorStr=#fafafa); /*IE*/ 
+	background:-moz-linear-gradient(top,#a1daed,#fafafa);/*火狐*/ 
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#a1daed), to(#ffffff));/*谷歌*/
+	}
+	.err{
+		font-size: 110px;
+    	text-align: center;
+    	margin: 0 auto;
+	}
+	.goback{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div class="main">
+		<h1 class="err">ERROR</h1>
+		<div class="goback">
+			<img alt="" src="../img/error.gif"><br>
+			<a  href="javaScript:history.go(-1)">返回</a>
+		</div>
+	</div>
+</body>
+</html>
