@@ -2,5 +2,6 @@ jdbcUrl = jdbc:mysql://localhost/myfilesys?characterEncoding=utf8&zeroDateTimeBe
 user = root
 password =123456
 devMode = true
+#存放文件的路径，在哪tomcat中设置虚拟目录
 WEB_ROOT_PATH=/usr/local/myFileSys
 #WEB_ROOT_PATH=C:\\myFileSys
