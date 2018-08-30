@@ -3,6 +3,6 @@
 ## 开发环境
 - maven：3.2.5
 - jdk:1.8
-- tomcat:1.8
+- tomcat:8
 - mysql:6.7
 
